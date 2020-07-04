@@ -1,0 +1,41 @@
+return ItemsList(
+                      items: snapshot.data,
+                      filter: filterText,
+                      itemsListBloc: this.produtosAdd,
+                    );
+
+                  }
+              }
+            },
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10)
+            ),
+            // color: Layout.secondary()
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Layout.secondary(0.2),
+                Layout.dark(0.4),
+              ]
+            ),
+          ),
+          height: 80,
+          child: StreamBuilder<List<Map>>(
+            stream: produtosAdd.lists,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const Center(child: Text('Carregando...'));
+                  break; // Useless after return
+                default:
+                  if (snapshot.hasError) {
+                    print(snapshot.error);
+                    return Text('Error: ${snapshot.error}');
+                  } else {

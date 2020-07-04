@@ -1,0 +1,20 @@
+class ProdutosAdd {
+
+  ProdutosAdd () {
+    getList();
+  }
+
+  ModelProduto produto = ModelProduto();
+
+  final _controller = StreamController<List<Map>>.broadcast();
+
+  get lists => _controller.stream;
+
+  dispose() {
+    _controller.close();
+  }
+
+  getList() async {
+    _controller.sink.add(await produto.itemsByList(ItensLista.pkList));
+  }
+}

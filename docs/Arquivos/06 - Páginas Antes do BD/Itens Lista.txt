@@ -1,0 +1,134 @@
+import 'package:flutter/material.dart';
+
+import '../layout.dart';
+
+
+class ItensLista extends StatefulWidget {
+  static String tag = 'itens-page';
+
+
+
+  @override
+  ItensListaState createState() {
+    return new ItensListaState();
+  }
+}
+
+class ItensListaState extends State<ItensLista> {
+
+  List<Widget>produtosLista = List<Widget>();
+
+  @override
+  void initState(){
+    _chamarLista();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    final content = SingleChildScrollView(
+      child:Column(
+          children: <Widget>[
+            SizedBox(
+                child:TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "Pesquisar"
+                  ),
+                )
+            ),
+            Container(
+              //color: Colors.red,
+              height: MediaQuery.of(context).size.height - 250,
+              child:ListView.builder(
+                itemCount: produtosLista.length,
+                itemBuilder: (BuildContext context, int index){
+                  return produtosLista[index];
+                }
+
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 20,
+              child:RaisedButton(
+                color: Layout.primaryDark(),
+                onPressed:(){
+                  setState(() {
+                    _chamarLista();
+                  });
+
+              },
+                child:Text('+ Novo Produto', style:TextStyle(color: Layout.light()))
+              ),
+
+            ),
+            Container(
+
+              color: Colors.blue,
+              height: 85,
+              child:Row(children:<Widget>[
+                Container(
+                  width:MediaQuery.of(context).size.width/2,
+                  color: Colors.green,
+                  padding:EdgeInsets.all(15),
+                  child:Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:<Widget>[
+                        Text('Produtos Adicionados: 5'),
+                        Text('Total de Produtos: 5'),
+                      ],
+                  ),
+                ),
+                Container(
+                  width:MediaQuery.of(context).size.width/2,
+                  color: Colors.deepOrange,
+                  padding:EdgeInsets.all(15),
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children:<Widget>[
+                      Text('Total Vendido', style: TextStyle(fontSize:20)),
+                    ],
+                  ),
+                )
+              ])
+            ),
+
+          ]
+      ),
+    );
+
+
+    return Layout.getContent(context, content, false);
+
+ }
+
+ void _chamarLista(){
+    produtosLista.add(
+        ListTile(
+          leading:GestureDetector(
+              child:Icon(Icons.check, color: Colors.green,),
+              onTap: (){
+                print('Adicionar produto');
+              }
+          ),
+
+          title: Text("Nome do Produto"),
+          subtitle: Text("Quantidade = 5, Valor = R 50"),
+          trailing:GestureDetector(
+            child:Icon(Icons.delete),
+            onTap:(){
+              print('Deletar produto');
+            },
+
+          ),
+          onLongPress: (){
+            print('Editar produto');
+          },
+        )
+
+    );
+ }
+
+ }
+
+

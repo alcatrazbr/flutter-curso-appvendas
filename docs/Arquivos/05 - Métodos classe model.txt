@@ -1,0 +1,65 @@
+import 'dart:async';
+import 'package:sqflite/sqflite.dart';
+
+class ModelVenda extends AbstractModel {
+
+  ///
+  /// Singleton
+  ///
+  
+  static ModelVenda _this;
+
+  factory ModelVenda() {
+    if (_this == null) {
+      _this = ModelVenda.getInstance();
+    }
+    return _this;
+  }
+
+  ModelVenda.getInstance() : super();
+
+  ///
+  /// The Instance
+  ///
+
+  @override
+  String get dbname => dbName;
+
+  @override
+  int get dbversion => dbVersion;
+
+  @override
+  Future<List<Map>> list() async {
+    Database db = await this.getDb();
+    return null;
+  }
+
+  @override
+  Future<Map> getItem(dynamic where) async {
+    Database db = await this.getDb();
+    
+    return null;
+  }
+
+  @override
+  Future<int> insert(Map<String, dynamic> values) async {
+    Database db = await this.getDb();
+    
+
+    return null;
+  }
+
+  @override
+  Future<bool> update(Map<String, dynamic> values, where) async {
+
+    Database db = await this.getDb();
+    return null;
+  }
+
+  @override
+  Future<bool> delete(dynamic id) async {
+    Database db = await this.getDb();
+    return null;
+  }
+
+}

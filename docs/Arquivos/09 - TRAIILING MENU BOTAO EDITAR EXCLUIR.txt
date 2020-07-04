@@ -1,0 +1,31 @@
+ trailing: PopupMenuButton<ListAction>(
+             onSelected: (ListAction result) {
+             switch(result) {
+               case ListAction.edit:
+                 //codigo da edição
+                 break;
+               case ListAction.delete:
+                  
+                 break;
+             }
+            },
+            itemBuilder: (BuildContext context) {
+              return <PopupMenuEntry<ListAction>>[
+                PopupMenuItem<ListAction>(
+                  value: ListAction.edit,
+                  child: Row(children: <Widget>[
+                    Icon(Icons.edit, color: Layout.secondary()),
+                    Text('Editar', style: TextStyle(color: Layout.secondary()))
+                  ]),
+                ),
+                PopupMenuItem<ListAction>(
+                  value: ListAction.delete,
+                  child: Row(children: <Widget>[
+                    Icon(Icons.delete, color: Layout.secondary()),
+                    Text('Excluir', style: TextStyle(color: Layout.secondary()))
+                  ]),
+                ),
+              ];
+            }
+
+          )

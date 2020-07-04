@@ -1,0 +1,111 @@
+ Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10)
+              ),
+              // color: Layout.secondary()
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[
+                    Layout.secondary(0.2),
+                    Layout.dark(0.4),
+                  ]
+              ),
+            ),
+            height: 80,
+            child: StreamBuilder<List<Map>>(
+              //stream: ,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return const Center(child: Text('Carregando...'));
+                    break; // Useless after return
+                  default:
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+
+                      // Recupera os itens
+                      List<Map> items = snapshot.data;
+
+                      // Total de itens
+                      int qtdTotal = items.length;
+
+                      // Total de itens marcados
+                      int qtdChecked = 0;
+
+                      // Valor total quando todos os items estiverem marcados
+                      double subTotal = 0.0;
+
+                      // Valor total de items marcados
+                      double vlrTotal = 0.0;
+
+                      for (Map item in items) {
+
+                        /*double vlr = currencyToFloat(item['valor']) * item['quantidade'];
+                        subTotal += vlr;
+
+                        if (item['checked'] == 1) {
+                          qtdChecked++;
+                          vlrTotal += vlr;
+                        }*/
+                      }
+
+                      // Quando todos os items forem marcados
+                      // o total devera ficar Verde (success)
+                      bool isClosed = (subTotal == vlrTotal);
+
+                      TextStyle secDarkText = TextStyle(color: Layout.secondaryDark(), fontWeight: FontWeight.bold);
+
+                      return Row(children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width/2,
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Column(children: <Widget>[
+                                Text('Produtos', style: secDarkText),
+                                Text(qtdTotal.toString(), textScaleFactor: 1.2, style: secDarkText)
+                              ]),
+                              Column(children: <Widget>[
+                                Text('Adicionados', style: secDarkText),
+                                Text(qtdChecked.toString(), textScaleFactor: 1.2, style: secDarkText)
+                              ]),
+
+                            ],
+                          ),
+                        ),
+                        Container(
+                          color: Color.fromRGBO(0, 0, 0, 0.04),
+                          width: MediaQuery.of(context).size.width/2,
+                          padding: EdgeInsets.only(left: 10, top: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Sub: 50,00', style: TextStyle(
+                                  fontSize: 18,
+                                  color: Layout.secondaryDark(),
+                                  fontWeight: FontWeight.bold
+                              )),
+                              SizedBox(height: 5),
+                              Text('Total: 100,00', style: TextStyle(
+                                  fontSize: 22,
+                                  color: isClosed ? Layout.primary() : Layout.primaryDark(),
+                                  fontWeight: FontWeight.bold
+                              ))
+                            ],
+                          ),
+                        )
+                      ]);
+                    }
+                // End switch default option
+                }
+              },
+            )
+        )

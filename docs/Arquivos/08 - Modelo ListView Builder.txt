@@ -1,0 +1,18 @@
+return ListView.builder(
+        itemCount: widget.itens.length,
+        itemBuilder: (BuildContext context, int index) {
+          Map item = widget.itens[index];
+
+          DateTime created = DateTime.tryParse(item['data']);
+
+          return ListTile(
+            leading: Icon(
+            Icons.attach_money, size: 42, color: Layout.secondary(0.6)),
+            title: Text(item['cliente']),
+            subtitle: Text('(' + item['qtdProdutos'].toString() + ' Produtos) - ' +
+                df.format(created)),
+
+
+          );
+        },
+    );

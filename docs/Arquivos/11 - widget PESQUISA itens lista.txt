@@ -1,0 +1,49 @@
+final content = Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+
+Container(
+          width: MediaQuery.of(context).size.width,
+          color: Color.fromRGBO(230, 230, 230, 0.5),
+          padding: EdgeInsets.only(left: 15, top: 10),
+          child: Text('Produtos',
+              style: TextStyle(fontSize: 16, color: Layout.dark())),
+        ),
+        Container(
+          color: Color.fromRGBO(230, 230, 230, 0.5),
+          padding: EdgeInsets.only(bottom: 10),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 80,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintText: 'Pesquisar',
+                      contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
+                    onChanged: (text) {
+                      setState(() {});
+                    },
+                  ),
+                ),
+                SizedBox(width: 10),
+                SizedBox(
+                  child: FloatingActionButton(
+                    mini: true,
+                    backgroundColor: Layout.secondary(),
+                    onPressed: () {},
+                    child: Icon(Icons.add),
+                  ),
+                )
+              ]),
+        ),
+    ]),
+
+
+
+

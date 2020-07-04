@@ -88,6 +88,7 @@ class Layout {
                             title: Text(txtCtrl.text),
                             // subtitle: Text('sub'),
                             onTap: (){
+                                print(ItemsLista.tag);
                                 Navigator.of(ctx).pushNamed(ItemsLista.tag);
                             },
 

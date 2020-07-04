@@ -1,0 +1,62 @@
+void showEditDialog(BuildContext context, Map item) {
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext ctx) {
+
+          TextEditingController _cEdit = TextEditingController();
+          _cEdit.text = item['cliente'];
+
+          final input = TextFormField(
+            controller: _cEdit,
+            autofocus: true,
+            decoration: InputDecoration(
+                hintText: 'Nome',
+                contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5)
+                )
+            ),
+          );
+
+          return AlertDialog(
+            title: Text('Editar'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  input
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              RaisedButton(
+                color: Layout.dark(0.2),
+                child: Text('Cancelar', style: TextStyle(color: Layout.light())),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              ),
+              RaisedButton(
+                color: Layout.primary(),
+                child: Text('Salvar', style: TextStyle(color: Layout.light())),
+                onPressed: () {
+                  ModelVenda venda = ModelVenda();
+
+                  venda.update({
+                    'cliente': _cEdit.text,
+                    'data': DateTime.now().toString()
+                  }, item['pk_venda']).then((saved) {
+
+                    Navigator.of(ctx).pop();
+                    Navigator.of(ctx).pushReplacementNamed(HomePage.tag);
+
+                  });
+                },
+              )
+            ],
+          );
+
+        }
+    );
+  }

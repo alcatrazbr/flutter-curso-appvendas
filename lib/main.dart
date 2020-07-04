@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
         accentColor: Layout.secondary(),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: TextTheme(
-          headline: TextStyle(
+          headline5: TextStyle(
           fontSize: 48,
           fontWeight: FontWeight.bold,
         ),
-        title: TextStyle(
+        headline6: TextStyle(
           fontSize: 24.0,
           fontStyle: FontStyle.italic,
           color: Layout.primary()

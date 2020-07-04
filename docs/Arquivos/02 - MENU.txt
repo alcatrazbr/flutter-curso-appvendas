@@ -1,0 +1,13 @@
+BottomNavigationBar bottomNavBar = BottomNavigationBar(
+      currentIndex: currItem,
+      //fixedColor: primary(),
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+        BottomNavigationBarItem(icon: Icon(Icons.question_answer), title: Text('Sobre')),
+         BottomNavigationBarItem(icon: Icon(Icons.settings), title: Text('Configurações'))
+      ],
+      onTap: (int i) {
+        currItem = i;
+        Navigator.of(context).pushReplacementNamed(pages[i]);
+      },
+    );
